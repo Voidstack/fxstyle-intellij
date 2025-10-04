@@ -14,6 +14,7 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -27,8 +28,12 @@ public class HelloController {
     private Optional<File> selectedFile = Optional.empty();
 
     @FXML
-    public void initialize() {
-
+    public void initialize() throws IOException {
+        File file = Paths.get("src/main/resources/" + R.css.mainCss.getResourcePath()).toFile();
+        selectedFile = Optional.of(file);
+        fileLabel.setText(file.getAbsolutePath());
+        onApplyStyle();
+        FileWatcher.watchFile(selectedFile.get().toPath(), this::onApplyStyle);
     }
 
     @FXML
@@ -50,7 +55,12 @@ public class HelloController {
     @FXML
     private void onChooseFile(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(R.com.enosistudio.fxstyleintellij.css._self.getAbsolutePath().toFile());
+
+        // On ne veut pas démarrer dans le répertoire courant, mais dans le répertoire des ressources
+        // FUCK LE TARGET
+        Path path = Paths.get("src/main/resources/" + R.css._self).toAbsolutePath();
+
+        fileChooser.setInitialDirectory(path.toFile());
         fileChooser.setTitle("Sélectionner un fichier");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers CSS", "*.css"));
         File file = fileChooser.showOpenDialog(((Node) event.getSource()).getScene().getWindow());

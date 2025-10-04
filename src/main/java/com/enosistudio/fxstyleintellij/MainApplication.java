@@ -15,16 +15,10 @@ public class MainApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        initializeStyle();
-
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("hello-view.fxml"));
         mainScene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Hello!");
         stage.setScene(mainScene);
         stage.show();
-    }
-
-    private void initializeStyle() {
-        Application.setUserAgentStylesheet(MainApplication.class.getResource("css/main.css").toExternalForm());
     }
 }

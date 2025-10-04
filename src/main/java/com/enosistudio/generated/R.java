@@ -33,14 +33,14 @@ public final class R {
                 public static final RFolder _self = new fxstyleintellij();
                 private fxstyleintellij() { super("fxstyleintellij", "com/enosistudio/fxstyleintellij"); }
                 public static final RFile helloViewFxml = new RFile("com/enosistudio/fxstyleintellij/hello-view.fxml");
-                
-                public static final class css extends RFolder {
-                    public static final RFolder _self = new css();
-                    private css() { super("css", "com/enosistudio/fxstyleintellij/css"); }
-                    public static final RFile mainCss = new RFile("com/enosistudio/fxstyleintellij/css/main.css");
-                    public static final RFile modenaCss = new RFile("com/enosistudio/fxstyleintellij/css/modena.css");
-                }
             }
         }
+    }
+    
+    public static final class css extends RFolder {
+        public static final RFolder _self = new css();
+        private css() { super("css", "css"); }
+        public static final RFile mainCss = new RFile("css/main.css");
+        public static final RFile modenaCss = new RFile("css/modena.css");
     }
 }

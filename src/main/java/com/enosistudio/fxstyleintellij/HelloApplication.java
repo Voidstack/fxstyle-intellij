@@ -10,14 +10,16 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        initializeStyle();
+
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Hello!");
         stage.setScene(scene);
-
-        // Appliquer le thème CSS
-        Application.setUserAgentStylesheet(getClass().getResource("custom/theme-light.css").toExternalForm());
-
         stage.show();
+    }
+
+    private void initializeStyle() {
+        Application.setUserAgentStylesheet(HelloApplication.class.getResource("css/main.css").toExternalForm());
     }
 }
